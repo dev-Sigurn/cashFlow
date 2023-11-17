@@ -22,9 +22,11 @@ input, select, textarea {
 	border-left: 0px;
 	border-right: 0px;
 }
-input:focus-visible {
+
+input:focus, select:focus {
 	outline: none;
 }
+
 button {
 	cursor: pointer;
 }
@@ -40,8 +42,9 @@ button {
 	margin : auto;
 }
 
-.login-form .w100 {
+.w100 {
 	width:100%;
+	display: inline-block;
 }
 
 /* 정렬 관련 클래스 */
@@ -170,5 +173,14 @@ button {
 	background-color: #dddddd;
 	color: #444444;
 	border : 0;
+}
+.red-white {
+	color: #eeeeee;
+	background-color: #cc3333;
+	border : 0;
+}
+
+.bold {
+	font-weight: bold;
 }
 

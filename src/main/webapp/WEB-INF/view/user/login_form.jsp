@@ -16,16 +16,16 @@
 			<a href="${pageContext.servletContext.contextPath }/user/join">회원가입</a>
 		</div>
 		<div class="px-5 py-2 align-center mt-6">
-			<h3>CashFlow는 금융 관리를 쉽고 효율적으로 도와주는 플랫폼입니다.</h3>
+			<h3>CashFlow는 소비 관리를 쉽고 효율적으로 도와주는 플랫폼입니다.</h3>
 			<p class="xxlarge-font">캐쉬플로우에 로그인</p>
 			<div>
 				<form class="login-form align-left">
 					<div class="my-5">
-						<label class="w100">사용자 계정(*)</label>
+						<label class="w100 bold">계정 아이디(*)</label>
 						<input type="text" class="large-font w100" />
 					</div>
 					<div class="my-5">
-						<label class="w100">사용자 비밀번호(*)</label>
+						<label class="w100 bold">계정 비밀번호(*)</label>
 						<input type="password" class="large-font w100"/>
 					</div>
 					<div class="my-5">

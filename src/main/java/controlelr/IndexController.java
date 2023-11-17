@@ -14,7 +14,10 @@ public class IndexController extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
-		req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
+		if(req.getSession().getAttribute("") == null) {
+			req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
+		}else {
+			req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
+		}
 	}
 }
