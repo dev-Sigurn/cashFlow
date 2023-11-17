@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet"
 	href="${pageContext.servletContext.contextPath }/resource/style/style.css">
-<title>효율적인 소비 - CashFlow</title>
+<title>회원가입 - CashFlow</title>
 </head>
 <body>
 	<div class="container">
@@ -17,7 +17,7 @@
 		</div>
 		<div class="px-5 py-2 align-center mt-6">
 			<h3>CashFlow는 금융 관리를 쉽고 효율적으로 도와주는 플랫폼입니다.</h3>
-			<p class="xxlarge-font">우리는 사용자들이 자신의 지출을 더 잘 이해하고 효과적으로 관리할 수 있도록 돕고자 합니다.</p>
+			<p class="xxlarge-font">진행예정입니다.</p>
 		</div>
 		
 	</div>
