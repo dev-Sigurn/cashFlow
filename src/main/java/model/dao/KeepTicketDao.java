@@ -5,25 +5,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import model.vo.Avatar;
+import model.vo.KeepTicket;
 import model.vo.User;
 
-public class UserDao {
-	public boolean save(User user) throws ClassNotFoundException {
+public class KeepTicketDao {
+	public boolean save(KeepTicket ticket) throws ClassNotFoundException {
 		// 1. 데이터 베이스 연결
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.136.55:1521:xe", "cashflow",
 				"oracle")) {
 			boolean result = false;
 			// 2. 필요한 작업요청을 전송하고 응답을 받으면 됨.
-			String sql = "INSERT INTO USERS VALUES(?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO KEEP_TICKETS VALUES(?, ?, ?)";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user.getId());
-			pstmt.setString(2, user.getPassword());
-			pstmt.setInt(3, user.getBirth());
-			pstmt.setString(4, user.getGender());
-			pstmt.setString(5, user.getNickname());
-			pstmt.setString(6, user.getAvatarId());
+			pstmt.setString(1, ticket.getCode());
+			pstmt.setString(2, ticket.getUserId());
+			pstmt.setDate(3, ticket.getExpiredAt());
 
 			int n = pstmt.executeUpdate(); // 요청 전송하고 DB에서 응답을 받아옴.
 			if (n == 1) {
@@ -36,23 +33,20 @@ public class UserDao {
 		}
 	}
 
-	public User findById(String userId) throws ClassNotFoundException {
+	public KeepTicket findByCode(String ticketCode) throws ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@3.34.136.55:1521:xe", "cashflow",
 				"oracle")) {
-			String sql = "SELECT * FROM USERS WHERE ID=?";
+			String sql = "SELECT * FROM KEEP_TICKETS WHERE CODE=?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userId);
+			pstmt.setString(1, ticketCode);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				User user = new User();
-				user.setId( rs.getString("id")); // rs.getInt("code")
-				user.setPassword(rs.getString("password"));
-				user.setNickname(rs.getString("nickname"));
-				user.setBirth(rs.getInt("birth"));
-				user.setAvatarId(rs.getString("avatar_id"));
-				user.setGender(rs.getString("gender"));
-				return user;
+				KeepTicket ticket = new KeepTicket();
+				ticket.setCode(rs.getString("code"));
+				ticket.setUserId(rs.getString("user_id"));
+				ticket.setExpiredAt(rs.getDate("expired_at"));
+				return ticket;
 			} else {
 				return null;
 			}

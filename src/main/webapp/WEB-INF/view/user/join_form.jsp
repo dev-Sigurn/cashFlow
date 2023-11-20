@@ -34,7 +34,7 @@
 					</div>
 					<div class="my-2">
 						<label class="w100 bold">사용할 비밀번호(*)</label> <input
-							type="password" class="large-font w100" name="password" />
+							type="password" class="large-font w100" name="password" value="${tempUser.password }"/>
 					</div>
 					<h3 class="my-3 black-white">Ⅱ.추가정보</h3>
 					<div class="my-2">
@@ -79,7 +79,6 @@
 										<input type="radio" name="avatarId" value="${one.id }"
 											id="${one.id }-radio" ${tempUser.avatarId eq one.id ? 'checked' : '' }/>
 									</div>
-
 								</div>
 							</c:forEach>
 						</div>

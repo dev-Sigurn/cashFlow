@@ -24,37 +24,35 @@ public class JoinHandleController extends HttpServlet {
 			String gender = req.getParameter("gender");
 			String avatarId = req.getParameter("avatarId");
 			int birth = Integer.parseInt(req.getParameter("birth"));
-			User one = new User(id, password, birth, gender, nickname, avatarId);
 			
-			if(id == null || password == null|| nickname == null || gender == null || avatarId == null) {
-				
+			if (id == null || password == null || nickname == null || gender == null || avatarId == null) {
+				// 파라미터 유효성 검사
 			}
-			
+
+			User one = new User(id, password, birth, gender, nickname, avatarId);
+
 			UserDao userDao = new UserDao();
 			User found = userDao.findById(id);
-			AvatarDao avatarDao = new AvatarDao();
-			if(found != null) {
-				req.setAttribute("error", true);
-				req.setAttribute("tempUser", one);
-				List<Avatar> avatars = avatarDao.findAll();
-				req.setAttribute("avatars", avatars);
-				req.getRequestDispatcher("/WEB-INF/view/user/join_form.jsp").forward(req, resp);
-			}else {
+			if (found == null) {	// 이 아이디로 등록된 유저가 없다는 상황
 				userDao.save(one);
 				req.setAttribute("result", 1);
 				req.getRequestDispatcher("/WEB-INF/view/user/join_result.jsp").forward(req, resp);
+			} else {	// 이미 이 아이디가 있다면..?
+				req.setAttribute("error", true);
+				req.setAttribute("tempUser", one);
+//				
+				AvatarDao avatarDao = new AvatarDao();
+				List<Avatar> avatars = avatarDao.findAll();
+				req.setAttribute("avatars", avatars);
+				req.getRequestDispatcher("/WEB-INF/view/user/join_form.jsp").forward(req, resp);
 			}
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			req.setAttribute("result", -1);
 			req.getRequestDispatcher("/WEB-INF/view/user/join_result.jsp").forward(req, resp);
 		}
-		
-		
-		
-		
-		
+
 	}
 
 }

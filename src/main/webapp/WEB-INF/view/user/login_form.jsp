@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,17 +20,20 @@
 			<h3>CashFlow는 소비 관리를 쉽고 효율적으로 도와주는 플랫폼입니다.</h3>
 			<p class="xxlarge-font">캐쉬플로우에 로그인</p>
 			<div>
-				<form class="login-form align-left">
+				<form class="login-form align-left" action="${pageContext.servletContext.contextPath }/user/login/handle" method="post">
+					<c:if test="${error }">
+						<div class="red-white px-1">아이디 또는 비밀번호가 일치하지 않습니다.</div>
+					</c:if>
 					<div class="my-5">
 						<label class="w100 bold">계정 아이디(*)</label>
-						<input type="text" class="large-font w100" />
+						<input type="text" class="large-font w100" name="loginId"/>
 					</div>
 					<div class="my-5">
 						<label class="w100 bold">계정 비밀번호(*)</label>
-						<input type="password" class="large-font w100"/>
+						<input type="password" class="large-font w100" name="loginPassword"/>
 					</div>
 					<div class="my-5">
-						<input type="checkbox" class="large-font"/>
+						<input type="checkbox" class="large-font" name="keep" />
 						<label>로그인 상태 유지</label>
 					</div>
 					<div>
