@@ -47,9 +47,11 @@ public class TicketCodeCookieFilter extends HttpFilter {
 					String userId = foundTicket.getUserId();
 					UserDao userDao = new UserDao();
 					User foundUser = userDao.findById(userId);
-					request.getSession().setAttribute("logonUser", foundUser);
 					AvatarDao avatarDao = new AvatarDao();
 					Avatar foundAvatar = avatarDao.findById(foundUser.getAvatarId());
+					
+					
+					request.getSession().setAttribute("logonUser", foundUser);
 					request.getSession().setAttribute("logonUserAvatar", foundAvatar);
 				}
 			} catch (Exception e) {

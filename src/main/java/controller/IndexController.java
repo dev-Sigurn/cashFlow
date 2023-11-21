@@ -1,4 +1,4 @@
-package controlelr;
+package controller;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class IndexController extends HttpServlet {
 		if(req.getSession().getAttribute("logonUser") == null) {
 			req.getRequestDispatcher("/WEB-INF/view/index.jsp").forward(req, resp);
 		}else {
-			req.getRequestDispatcher("/WEB-INF/view/private/index.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/view/my/index.jsp").forward(req, resp);
 		}
 	}
 }

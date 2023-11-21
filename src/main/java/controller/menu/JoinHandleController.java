@@ -1,4 +1,4 @@
-package controlelr.menu;
+package controller.menu;
 
 import java.io.IOException;
 import java.util.List;

@@ -1,4 +1,4 @@
-package controlelr.menu;
+package controller.menu;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -30,12 +30,12 @@ public class LoginHandleController extends HttpServlet {
 			UserDao userDao = new UserDao();
 			User foundUser = userDao.findById(loginId);
 			if (foundUser != null && foundUser.getPassword().equals(loginPassword)) {
-				req.getSession().setAttribute("logonUser", foundUser);
-
 				AvatarDao avatarDao = new AvatarDao();
 				Avatar foundAvatar = avatarDao.findById(foundUser.getAvatarId());
 
+				req.getSession().setAttribute("logonUser", foundUser);
 				req.getSession().setAttribute("logonUserAvatar", foundAvatar);
+				
 				
 				// 사용자가 체크박스를 선택해서 요청을 보낸 경우..
 				if (keep != null) {

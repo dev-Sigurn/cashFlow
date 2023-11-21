@@ -1,4 +1,4 @@
-package controlelr.menu;
+package controller.menu;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class LogoutController extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getSession().invalidate();
 		
-		Cookie cookie = new Cookie("ticketCode", null);
+		Cookie cookie = new Cookie("ticketCode", "");
 		cookie.setPath(req.getServletContext().getContextPath());
 		cookie.setMaxAge(0);
 		resp.addCookie(cookie);

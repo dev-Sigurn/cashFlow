@@ -191,3 +191,7 @@ button {
 	font-weight: bold;
 }
 
+.border-line {
+	border-bottom: 1px solid #444444;
+}
+
