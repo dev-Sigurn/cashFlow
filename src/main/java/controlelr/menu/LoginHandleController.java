@@ -28,21 +28,21 @@ public class LoginHandleController extends HttpServlet {
 
 		try {
 			UserDao userDao = new UserDao();
-			User foundUser = userDao.findById(loginId);
+			User foundUser = userDao.findUserWithAvatarById(loginId);
 			if (foundUser != null && foundUser.getPassword().equals(loginPassword)) {
 				req.getSession().setAttribute("logonUser", foundUser);
 
-				AvatarDao avatarDao = new AvatarDao();
-				Avatar foundAvatar = avatarDao.findById(foundUser.getAvatarId());
-
-				req.getSession().setAttribute("logonUserAvatar", foundAvatar);
+//				AvatarDao avatarDao = new AvatarDao();
+//				Avatar foundAvatar = avatarDao.findById(foundUser.getAvatarId());
+//
+//				req.getSession().setAttribute("logonUserAvatar", foundAvatar);
 				
 				// 사용자가 체크박스를 선택해서 요청을 보낸 경우..
 				if (keep != null) {
 					// 랜덤 코드 만들어서
 					String code = UUID.randomUUID().toString();
 					String userId = loginId;
-					Date expiredAt = new Date(System.currentTimeMillis() + 1000*60*60*24*30 );
+					Date expiredAt = new Date(System.currentTimeMillis() + 1000L*60*60*24*30 );
 					KeepTicket ticket = new KeepTicket(code, userId, expiredAt);
 					
 					// 디비에 저장하고,

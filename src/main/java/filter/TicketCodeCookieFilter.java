@@ -43,19 +43,15 @@ public class TicketCodeCookieFilter extends HttpFilter {
 				KeepTicket foundTicket = keepTicketDao.findByCode(code);
 				Date now = new Date(System.currentTimeMillis());
 				
-				if(foundTicket != null && foundTicket.getExpiredAt().before(now)) {
+				if(foundTicket != null && foundTicket.getExpiredAt().after(now)) {
 					String userId = foundTicket.getUserId();
 					UserDao userDao = new UserDao();
-					User foundUser = userDao.findById(userId);
+					User foundUser = userDao.findUserWithAvatarById(userId);
 					request.getSession().setAttribute("logonUser", foundUser);
-					AvatarDao avatarDao = new AvatarDao();
-					Avatar foundAvatar = avatarDao.findById(foundUser.getAvatarId());
-					request.getSession().setAttribute("logonUserAvatar", foundAvatar);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 
 		// 100% 통과를 시키는 필터
