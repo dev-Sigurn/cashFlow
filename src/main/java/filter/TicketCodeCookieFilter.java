@@ -17,43 +17,14 @@ import model.vo.Avatar;
 import model.vo.KeepTicket;
 import model.vo.User;
 
-@WebFilter({ "/*" })
+@WebFilter("/*")
 public class TicketCodeCookieFilter extends HttpFilter {
 	@Override
 	protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		// 쿠키가 있다면 전처리 후
 		// 이 요청에 ticketCode 쿠키가 있는지를 확인.
-		Cookie found = null;
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null && cookies.length > 0) {
-			for (Cookie one : cookies) {
-				if (one.getName().equals("ticketCode")) {
-					found = one;
-					break;
-				}
-			}
-		}
-		// ========================================================
-		// 있으면, 값 찾아서 유저 찾고 세션에 올려서 통과
-		if (found != null) {
-			String code = found.getValue();
-			KeepTicketDao keepTicketDao = new KeepTicketDao();
-			try {
-				KeepTicket foundTicket = keepTicketDao.findByCode(code);
-				Date now = new Date(System.currentTimeMillis());
-				
-				if(foundTicket != null && foundTicket.getExpiredAt().after(now)) {
-					String userId = foundTicket.getUserId();
-					UserDao userDao = new UserDao();
-					User foundUser = userDao.findUserWithAvatarById(userId);
-					request.getSession().setAttribute("logonUser", foundUser);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
+		
 		// 100% 통과를 시키는 필터
 		chain.doFilter(request, response);
 	}
